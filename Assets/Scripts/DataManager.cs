@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager
+namespace Fox
 {
-    #region Êı¾İÀàÉùÃ÷
-    public ExcelData excelData { private set; get; }
-    #endregion
 
-    public void InitData()
+    public class DataManager
     {
-        excelData = new ExcelData();
+        #region æ•°æ®ç±»å£°æ˜
+        public ExcelData excelData { private set; get; }
+        #endregion
+
+        public void InitData()
+        {
+            excelData = new ExcelData();
+        }
     }
 }
