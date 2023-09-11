@@ -20,10 +20,11 @@ namespace Fox.Excel
 
         public readonly IReadOnlyDictionary<uint, T> data;
 
-        public ExcelTable(in string name)
+        internal ExcelTable(in string name, IExcelLoaderRegister register)
         {
             _name = name;
             data = _data;
+            register.Register(this);
         }
 
         public void Reload(in string jsonString)
