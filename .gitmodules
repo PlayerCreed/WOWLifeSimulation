@@ -1,0 +1,3 @@
+[submodule "Assets/AARes/External"]
+	path = Assets/AARes/External
+	url = https://github.com/PlayerCreed/WOWLifeSimulation_Res
