@@ -1,6 +1,5 @@
-namespace Fox
+namespace Fox.Excel
 {
-    using Excel;
 
     public class Language : ExcelUnit
     {

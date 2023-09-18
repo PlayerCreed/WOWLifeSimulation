@@ -40,6 +40,9 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 3b32cb7b14f4bb041821825c7866a9be, type: 2}
   - {fileID: 11400000, guid: 9b36b035787830e4ea162580f4201c3b, type: 2}
+  - {fileID: 11400000, guid: 026e61ccbc477a6419900cd3098709bd, type: 2}
+  - {fileID: 11400000, guid: 2c0061eb1c0f2c148bbc2e4bf67c5360, type: 2}
+  - {fileID: 11400000, guid: fd31f98809fa8644c9a31aeab4983f80, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -80,7 +83,8 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
+    - Excel
+    - UI
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 11c34debfe607fe4aa7b3d2696ee66ac, type: 2}

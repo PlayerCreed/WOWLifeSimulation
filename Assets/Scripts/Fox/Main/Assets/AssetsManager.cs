@@ -5,8 +5,14 @@ using UnityEngine;
 
 namespace Fox
 {
+    using Assets;
     public class AssetsManager : Manager<AssetsManager>
     {
+        #region 加载器声明
+        ConfigLoader configLoader = new ConfigLoader();
+        ScriptableLoader scriptableLoader = new ScriptableLoader();
+        #endregion
+
         public T ConfigLoad<T>(in string path) where T : UnityEngine.Object
         {
             return Resources.Load<T>(path);

@@ -11,23 +11,33 @@ namespace Fox.Excel
         public uint id { set; get; }
     }
 
-    public class ExcelTable<T> : IExcelLoader where T : ExcelUnit, new()
+    public abstract class ExcelTableBase : IExcelLoader
     {
         private readonly string _name;
         public string name => _name;
 
+        public ExcelTableBase(in string name)
+        {
+            _name = name;
+            IExcelTableRegister register = ExcelData.instance as IExcelTableRegister;
+            register.Register(this);
+        }
+
+        public abstract void Reload(in string jsonString);
+    }
+
+    public class ExcelTable<T> : ExcelTableBase where T : ExcelUnit, new()
+    {
         private readonly Dictionary<uint, T> _data = new Dictionary<uint, T>();
 
         public readonly IReadOnlyDictionary<uint, T> data;
 
-        internal ExcelTable(in string name, IExcelLoaderRegister register)
+        public ExcelTable(in string name) : base(name)
         {
-            _name = name;
             data = _data;
-            register.Register(this);
         }
 
-        public void Reload(in string jsonString)
+        public override void Reload(in string jsonString)
         {
             T[] values = JsonConvert.DeserializeObject<T[]>(jsonString);
             foreach (var item in values)

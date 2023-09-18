@@ -5,23 +5,29 @@ namespace Fox
 {
     using Excel;
 
-    public partial class ExcelData : DataBase, IExcelLoaderRegister
+    public class ExcelData : DataBase<ExcelData>, IExcelTableRegister
     {
-        private const string excelPath = "";
+        private const string excelIndexName = "ExcelIndex";
 
-        private List<IExcelLoader> loaders = new List<IExcelLoader>();
+        private Dictionary<string, ExcelTableBase> tables = new Dictionary<string, ExcelTableBase>();
 
-        void IExcelLoaderRegister.Register(in IExcelLoader loader)
+        void IExcelTableRegister.Register(in ExcelTableBase table)
         {
-            loaders.Add(loader);
+            tables.Add(table.name, table);
         }
-
 
         public void LoadExcel()
         {
 
         }
 
-
+        public T GetExcelTable<T>(string tableName) where T : ExcelTableBase
+        {
+            if (tables.TryGetValue(tableName, out var table))
+            {
+                return table as T;
+            }
+            return null;
+        }
     }
 }

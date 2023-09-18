@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class DataBase
+namespace Fox
 {
-    internal virtual void Init()
+    public abstract class DataBase<T> : Singleton<T> where T : class, new()
     {
+        internal virtual void Init()
+        {
+            
+        }
 
-    }
+        internal virtual void Clear()
+        {
 
-    internal virtual void Clear()
-    {
-
+        }
     }
 }

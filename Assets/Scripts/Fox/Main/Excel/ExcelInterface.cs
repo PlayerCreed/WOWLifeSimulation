@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 namespace Fox.Excel
 {
 
@@ -14,8 +11,8 @@ namespace Fox.Excel
         public void Reload(in string jsonString);
     }
 
-    internal interface IExcelLoaderRegister
+    internal interface IExcelTableRegister
     {
-        internal void Register(in IExcelLoader loader);
+        internal void Register(in ExcelTableBase table);
     }
 }

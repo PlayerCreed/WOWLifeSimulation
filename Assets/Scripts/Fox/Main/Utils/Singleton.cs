@@ -46,7 +46,7 @@ namespace Fox
         }
     }
 
-    public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>, IDisposable
+    public abstract class MonoSingleton<T> : MonoBehaviour, IDisposable where T : MonoSingleton<T>
     {
         private static T _instance = null;
 

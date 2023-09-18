@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Fox
 {
-    public partial class DataManager : Manager<DataManager>
+    public class DataManager : Manager<DataManager>
     {
+        
 
         public void InitData()
         {
-            excelData = new ExcelData();
+            //excelData = new ExcelData();
         }
     }
 }
