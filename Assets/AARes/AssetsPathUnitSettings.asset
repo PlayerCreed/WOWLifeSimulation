@@ -16,6 +16,6 @@ MonoBehaviour:
   - type: 0
     path: Assets/AARes/External/Excel/
   - type: 2
-    path: Assets/AARes/External/Prefabs/UI/
+    path: Assets/AARes/External/Scriptable/
   - type: 3
     path: Assets/AARes/External/Prefabs/UI/

@@ -30,9 +30,11 @@ namespace Fox
         public void LoadExcelIndexCallback(ScriptableObject scriptable)
         {
             excelIndex = scriptable as ExcelIndex;
+            Type tablet = typeof(ExcelTable<>);
             foreach (var name in excelIndex.excels)
             {
-                Type t = Type.GetType(StringUtil.Append("ExcelTable<", name, ">"));
+                Type t = Type.GetType(name);
+                t = tablet.MakeGenericType(t);
                 t.Assembly.CreateInstance(t.FullName, false);
             }
             foreach (var item in tables.Values)
@@ -41,11 +43,21 @@ namespace Fox
             }
         }
 
-        public T GetExcelTable<T>(string tableName) where T : ExcelTableBase
+        public ExcelTable<T> GetExcelTable<T>(string tableName) where T : ExcelUnit, new()
         {
             if (tables.TryGetValue(tableName, out var table))
             {
-                return table as T;
+                return table as ExcelTable<T>;
+            }
+            return null;
+        }
+
+        public T GetExcelUnit<T>(string tableName, in uint id) where T : ExcelUnit, new()
+        {
+            if (tables.TryGetValue(tableName, out var table))
+            {
+                var nowtable = table as ExcelTable<T>;
+                return nowtable.GetUnit(id);
             }
             return null;
         }

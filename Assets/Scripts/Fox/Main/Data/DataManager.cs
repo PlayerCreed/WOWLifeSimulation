@@ -6,7 +6,7 @@ namespace Fox
 {
     public class DataManager : Manager<DataManager>
     {
-        private HashSet<IData> datas;
+        private HashSet<IData> datas = new HashSet<IData>();
 
         internal void DataRegister(in IData data)
         {

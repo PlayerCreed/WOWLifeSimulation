@@ -6,7 +6,7 @@ public class Init : MonoBehaviour
 {
     void Start()
     {
-        GameManager.instance.Init();
+        GameManager.instance.InitGame();
     }
 
  

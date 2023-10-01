@@ -37,7 +37,7 @@ namespace Fox
         {
             if (assetsPath.TryGetValue(AssetsType.Excel, out string path))
             {
-                path = StringUtil.Append(path, name);
+                path = StringUtil.Append(path, name, ".json");
                 configLoader.Load(in path, in callback);
             }
         }
@@ -46,14 +46,14 @@ namespace Fox
         {
             if (assetsPath.TryGetValue(AssetsType.Scriptable, out string path))
             {
-                path = StringUtil.Append(path, name);
+                path = StringUtil.Append(path, name, ".asset");
                 scriptableLoader.Load(in path, in callback);
             }
         }
 
-        public void UILoad(in string name, in Action<UIPanel> callback)
+        public void UILoad(in string name, in Action<GameObject> callback)
         {
-            if (assetsPath.TryGetValue(AssetsType.Scriptable, out string path))
+            if (assetsPath.TryGetValue(AssetsType.UI, out string path))
             {
                 path = StringUtil.Append(path, name, ".prefab");
                 uiLoader.Load(in path, in callback);

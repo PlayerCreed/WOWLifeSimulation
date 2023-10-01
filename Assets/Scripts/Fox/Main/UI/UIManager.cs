@@ -25,11 +25,14 @@ namespace Fox
             AssetsManager.instance.UILoad(name, OpenPanelCallback);
         }
 
-        private void OpenPanelCallback(UIPanel panel)
+        private void OpenPanelCallback(GameObject panel)
         {
-            UIPanel ins = GameObject.Instantiate(panel, uiRootTransform);
+            UIPanel ins = GameObject.Instantiate<UIPanel>(panel.GetComponent<UIPanel>(), uiRootTransform);
             panels.Add(ins.GetInstanceID(), ins);
-            panelReferencing[panel.panelName]++;
+            if (panelReferencing.ContainsKey(ins.panelName))
+                panelReferencing[ins.panelName]++;
+            else
+                panelReferencing[ins.panelName] = 1;
         }
 
         public void ClosePanel(UIPanel panel)

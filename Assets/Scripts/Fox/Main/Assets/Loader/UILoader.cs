@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Fox.Assets
 {
-    internal class UILoader : AssetsLoader<UIPanel>
+    internal class UILoader : AssetsLoader<GameObject>
     {
-        internal void Load(in string path, in Action<UIPanel> callback)
+        internal void Load(in string path, in Action<GameObject> callback)
         {
             LoadAssets(in path, in callback);
         }

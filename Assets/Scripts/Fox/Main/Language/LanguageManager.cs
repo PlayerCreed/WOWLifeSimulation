@@ -24,8 +24,8 @@ namespace Fox
                 this.interpreter = interpreter;
             }
         }
-        
-        public string GetText(in int id)
+
+        public string GetText(in uint id)
         {
             return interpreter.GetText(in id);
         }

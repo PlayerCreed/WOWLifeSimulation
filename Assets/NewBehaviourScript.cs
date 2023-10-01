@@ -12,9 +12,9 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
 
-        Addressables.LoadAssetAsync<GameObject>("Assets/AARes/External/Prefabs/UI/MainPanel.prefab").Completed += (textAsset) =>
+        Addressables.LoadAssetAsync<UIPanel>("Assets/AARes/External/Prefabs/UI/MainPanel.prefab").Completed += (textAsset) =>
         {
-            GameObject dd = textAsset.Result;
+            var dd = textAsset.Result;
         };
         //Addressables.LoadAssetAsync<GameObject>("Assets/AARes/External/Prefabs/UI/LoadingPanel.prefab").Completed += (textAsset) =>
         //{

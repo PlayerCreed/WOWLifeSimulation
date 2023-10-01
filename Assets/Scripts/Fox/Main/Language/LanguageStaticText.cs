@@ -5,7 +5,7 @@ namespace Fox.Language
 {
     public class LanguageStaticText : MonoBehaviour
     {
-        public int id;
+        public uint id;
         private Text text;
         private void Start()
         {
