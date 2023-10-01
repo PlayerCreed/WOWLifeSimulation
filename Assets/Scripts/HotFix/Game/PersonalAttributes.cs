@@ -1,6 +1,8 @@
 public enum PersonalAttributes
 {
-    Strength,
-    Agility,
-    Intelligence
+    Level,
+    Power,
+    Effort,
+    Money,
+    Lucky
 }
