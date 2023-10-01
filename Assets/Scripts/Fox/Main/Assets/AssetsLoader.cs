@@ -6,6 +6,14 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Fox.Assets
 {
+    public enum AssetsType : byte
+    {
+        Excel = 0,
+        Config,
+        Scriptable,
+        UI,
+    }
+
     public abstract class AssetsLoader<T>
     {
         private class LoaderCallback : IRelease
@@ -34,13 +42,15 @@ namespace Fox.Assets
 
             internal void Completed(AsyncOperationHandle<T> handle)
             {
-                callback(handle.Result);
+                T asset = handle.Result;
+                callback(asset);
                 handle.Completed -= Completed;
                 loader.RecyclingCallback(this);
+                loader.LoadEnd(in asset, in path);
             }
         }
 
-        protected virtual uint callBackPoolSize => 10;
+        protected virtual uint callBackPoolSize => 4;
 
         private LoaderCallback[] callBackPool;
 
@@ -51,7 +61,11 @@ namespace Fox.Assets
         public AssetsLoader()
         {
             callBackPool = new LoaderCallback[callBackPoolSize];
-            poolPointer = (int)callBackPoolSize;
+            poolPointer = (int)(callBackPoolSize - 1);
+            for (int i = 0; i < callBackPoolSize; i++)
+            {
+                callBackPool[i] = new LoaderCallback(this); ;
+            }
         }
 
         private LoaderCallback GetCallback()
@@ -78,6 +92,8 @@ namespace Fox.Assets
             callBackPool[++poolPointer] = callBack;
         }
 
+        protected virtual void LoadEnd(in T asset, in string path) { }
+
         protected void LoadAssets(in string path, in Action<T> callback)
         {
             var handle = Addressables.LoadAssetAsync<T>(path);
@@ -88,7 +104,7 @@ namespace Fox.Assets
 
         protected void ReleaseAssets(in string path)
         {
-            if (handles.TryGetValue(path,out var handle))
+            if (handles.TryGetValue(path, out var handle))
             {
                 Addressables.Release<T>(handle);
             }

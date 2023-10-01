@@ -6,5 +6,8 @@ using UnityEngine;
 
 public class GameManager : Manager<GameManager>
 {
-
+    public override void Init()
+    {
+        UIManager.instance.OpenPanel("MainPanel");
+    }
 }

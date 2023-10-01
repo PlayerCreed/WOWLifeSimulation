@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Fox
 {
-    public class Singleton<T> where T : class, new()
+    public abstract class Singleton<T> where T : class, new()
     {
         private static T _instance;
 
@@ -32,6 +32,14 @@ namespace Fox
 
             return _instance;
         }
+
+        public Singleton()
+        {
+            Create();
+        }
+
+        protected virtual void Create() { }
+
 
         public static void Destroy()
         {

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Fox.Excel
 {
 
@@ -8,7 +10,7 @@ namespace Fox.Excel
 
     internal interface IExcelLoader : IExcelName
     {
-        public void Reload(in string jsonString);
+        public void Reload(TextAsset jsonString);
     }
 
     internal interface IExcelTableRegister

@@ -1,16 +1,24 @@
+using Fox.Data;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Fox
+namespace Fox.Data
 {
-    public abstract class DataBase<T> : Singleton<T> where T : class, new()
+    public abstract class DataBase<T> : Singleton<T>, IData where T : class, new()
     {
-        internal virtual void Init()
+
+        public DataBase() 
         {
-            
+            DataManager.instance.DataRegister(this);
+            Init();
         }
 
-        internal virtual void Clear()
+        public virtual void Init()
+        {
+
+        }
+
+        public virtual void Clear()
         {
 
         }

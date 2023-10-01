@@ -1,23 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Fox
 {
+    using Language;
     public class LanguageManager : Manager<LanguageManager>
     {
-        public string languageName { get; private set; }
+        public string languageName => interpreter.languageName;
+
+        private LanguageInterpreter interpreter;
 
         private Dictionary<string, LanguageInterpreter> interpreters = new Dictionary<string, LanguageInterpreter>();
 
-        internal void InterpreterRegister(LanguageInterpreter interpreter)
+        internal void InterpreterRegister(in LanguageInterpreter interpreter)
         {
             interpreters.Add(interpreter.languageName, interpreter);
         }
 
-        public void ChangeLanguage(string languageName)
+        public void ChangeLanguage(in string languageName)
         {
-            this.languageName = languageName;
+            if (interpreters.TryGetValue(languageName, out var interpreter))
+            {
+                this.interpreter = interpreter;
+            }
+        }
+        
+        public string GetText(in int id)
+        {
+            return interpreter.GetText(in id);
         }
     }
 }

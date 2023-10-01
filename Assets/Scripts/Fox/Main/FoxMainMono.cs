@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Fox
 {
+    using Assets;
     public class FoxMainMono : MonoSingleton<FoxMainMono>
     {
+        [SerializeField]
         private AssetsPathSettings assetsPathSettings;
 
         private List<IUpdate> updates = new List<IUpdate>(8);
@@ -14,7 +16,7 @@ namespace Fox
 
         private void Start()
         {
-            
+            AssetsManager.instance.SetAssetsPathSettings(assetsPathSettings);
         }
 
         private void Update()

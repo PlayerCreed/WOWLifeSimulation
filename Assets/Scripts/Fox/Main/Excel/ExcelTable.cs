@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Fox.Excel
 {
@@ -13,17 +14,16 @@ namespace Fox.Excel
 
     public abstract class ExcelTableBase : IExcelLoader
     {
-        private readonly string _name;
+        protected string _name;
         public string name => _name;
 
-        public ExcelTableBase(in string name)
+        public ExcelTableBase()
         {
-            _name = name;
             IExcelTableRegister register = ExcelData.instance as IExcelTableRegister;
             register.Register(this);
         }
 
-        public abstract void Reload(in string jsonString);
+        public abstract void Reload(TextAsset jsonString);
     }
 
     public class ExcelTable<T> : ExcelTableBase where T : ExcelUnit, new()
@@ -32,14 +32,16 @@ namespace Fox.Excel
 
         public readonly IReadOnlyDictionary<uint, T> data;
 
-        public ExcelTable(in string name) : base(name)
+        public ExcelTable() : base()
         {
+            _name = typeof(T).Name;
+            string name = string.Empty;
             data = _data;
         }
 
-        public override void Reload(in string jsonString)
+        public override void Reload(TextAsset jsonString)
         {
-            T[] values = JsonConvert.DeserializeObject<T[]>(jsonString);
+            T[] values = JsonConvert.DeserializeObject<T[]>(jsonString.text);
             foreach (var item in values)
             {
                 _data.Add(item.id, item);
