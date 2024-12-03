@@ -5,8 +5,9 @@ using UnityEngine;
 namespace Fox.Excel
 {
 
-    public class ExcelIndex : ScriptableObject
+    public abstract class ExcelIndexBase : ScriptableObject
     {
-        public string[] excels;
+
+        public abstract void InitExcelIndex();
     }
 }

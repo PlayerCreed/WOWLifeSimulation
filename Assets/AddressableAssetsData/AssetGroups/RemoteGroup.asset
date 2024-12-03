@@ -17,14 +17,16 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 65ddb8b0d6bda9041b1c0a9c26fa8b3d
   m_SerializeEntries:
-  - m_GUID: df85e32d6d191a44a8fc7a540215d17a
-    m_Address: Assets/AARes/External/Excel
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 8971fd11183bb474c9989d67332a99e0
     m_Address: Assets/AARes/External/Scriptable
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df85e32d6d191a44a8fc7a540215d17a
+    m_Address: Assets/AARes/External/Excel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7de5e2752257c604ea6e05df92f0b3bd, type: 2}
   m_SchemaSet:

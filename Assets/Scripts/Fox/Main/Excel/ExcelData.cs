@@ -10,11 +10,9 @@ namespace Fox
 
     public class ExcelData : DataBase<ExcelData>, IExcelTableRegister
     {
-        private const string excelIndexName = "ExcelIndex";
-
-        private ExcelIndex excelIndex;
-
         private Dictionary<string, ExcelTableBase> tables = new Dictionary<string, ExcelTableBase>();
+
+        ExcelIndexBase excelIndex;
 
         void IExcelTableRegister.Register(in ExcelTableBase table)
         {
@@ -24,23 +22,21 @@ namespace Fox
         public override void Init()
         {
             base.Init();
-            AssetsManager.instance.ScriptableLoad(excelIndexName, LoadExcelIndexCallback);
+            InitExcelIndex();
         }
 
-        public void LoadExcelIndexCallback(ScriptableObject scriptable)
+        public void InitExcelIndex()
         {
-            excelIndex = scriptable as ExcelIndex;
-            Type tablet = typeof(ExcelTable<>);
-            foreach (var name in excelIndex.excels)
-            {
-                Type t = Type.GetType(name);
-                t = tablet.MakeGenericType(t);
-                t.Assembly.CreateInstance(t.FullName, false);
-            }
+            excelIndex.InitExcelIndex();
             foreach (var item in tables.Values)
             {
                 AssetsManager.instance.ExcelLoad(item.name, item.Reload);
             }
+        }
+
+        public ExcelTable<T> AddExcelTable<T>(T unit) where T : ExcelUnit, new()
+        {
+            return new ExcelTable<T>();
         }
 
         public ExcelTable<T> GetExcelTable<T>(string tableName) where T : ExcelUnit, new()
@@ -60,6 +56,15 @@ namespace Fox
                 return nowtable.GetUnit(id);
             }
             return null;
+        }
+
+        internal void SetExcelIndex(ExcelIndexBase excelIndex)
+        {
+            if (excelIndex == null)
+            {
+                return;
+            }
+            this.excelIndex = excelIndex;
         }
     }
 }

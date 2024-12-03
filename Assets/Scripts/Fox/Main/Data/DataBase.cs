@@ -7,10 +7,9 @@ namespace Fox.Data
     public abstract class DataBase<T> : Singleton<T>, IData where T : class, new()
     {
 
-        public DataBase() 
+        public DataBase()
         {
             DataManager.instance.DataRegister(this);
-            Init();
         }
 
         public virtual void Init()

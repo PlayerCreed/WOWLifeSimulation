@@ -56,7 +56,7 @@ namespace Fox.Assets
 
         private int poolPointer;
 
-        private Dictionary<string, AsyncOperationHandle<T>> handles;
+        private Dictionary<string, AsyncOperationHandle<T>> handles = new Dictionary<string, AsyncOperationHandle<T>>();
 
         public AssetsLoader()
         {
@@ -100,6 +100,14 @@ namespace Fox.Assets
             LoaderCallback call = GetCallback();
             call.SetLoader(in path, in callback);
             handle.Completed += call.Completed;
+            if (handles.TryGetValue(path, out var oldHandle))
+            {
+                Addressables.Release<T>(oldHandle);
+            }
+            else
+            {
+                handles[path] = handle;
+            }
         }
 
         protected void ReleaseAssets(in string path)

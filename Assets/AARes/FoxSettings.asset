@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617c44e338449934d85d3da8734b3ee2, type: 3}
+  m_Name: FoxSettings
+  m_EditorClassIdentifier: 
+  assetsPathSettings: {fileID: 11400000, guid: 3798e01934d71d7438aa1457b4b1f2b8, type: 2}
+  excelIndex: {fileID: 11400000, guid: 78be44adab12cf7419117a2cb0f30860, type: 2}

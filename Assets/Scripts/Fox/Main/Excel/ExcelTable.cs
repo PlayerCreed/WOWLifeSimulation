@@ -17,8 +17,9 @@ namespace Fox.Excel
         protected string _name;
         public string name => _name;
 
-        public ExcelTableBase()
+        public ExcelTableBase(in string name)
         {
+            _name = name;
             IExcelTableRegister register = ExcelData.instance as IExcelTableRegister;
             register.Register(this);
         }
@@ -32,9 +33,8 @@ namespace Fox.Excel
 
         public readonly IReadOnlyDictionary<uint, T> data;
 
-        public ExcelTable() : base()
+        public ExcelTable() : base(typeof(T).Name)
         {
-            _name = typeof(T).Name;
             string name = string.Empty;
             data = _data;
         }
@@ -56,7 +56,10 @@ namespace Fox.Excel
 
         public T GetUnit(in uint id)
         {
-            data.TryGetValue(id, out var unit);
+            if (!data.TryGetValue(id, out var unit))
+            {
+
+            }
             return unit;
         }
     }

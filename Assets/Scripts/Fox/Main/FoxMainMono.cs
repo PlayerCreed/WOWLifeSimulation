@@ -8,7 +8,7 @@ namespace Fox
     public class FoxMainMono : MonoSingleton<FoxMainMono>
     {
         [SerializeField]
-        private AssetsPathSettings assetsPathSettings;
+        private FoxSettings foxSettings;
 
         private List<IUpdate> updates = new List<IUpdate>(8);
         private List<ILateUpdate> lateUpdates = new List<ILateUpdate>(8);
@@ -16,7 +16,8 @@ namespace Fox
 
         private void Start()
         {
-            AssetsManager.instance.SetAssetsPathSettings(assetsPathSettings);
+            foxSettings.SetModelsSettings();
+            DataManager.instance.InitData();
         }
 
         private void Update()
@@ -27,7 +28,7 @@ namespace Fox
 
         private void LateUpdate()
         {
-            foreach(var update in lateUpdates)
+            foreach (var update in lateUpdates)
                 update.LateUpdate();
         }
 
