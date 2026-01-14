@@ -7,13 +7,13 @@ namespace Fox
     {
         private static T _instance;
 
-        public static T instance => getInstance();
+        public static T instance => GetInstance();
 
         public static bool isInit => _instance != null;
         //二次检查锁定有问题
         static readonly object syslock = new object();
 
-        private static T getInstance()
+        private static T GetInstance()
         {
             if (_instance == null)
             {
@@ -60,15 +60,15 @@ namespace Fox
 
         static readonly object syslock = new object();
 
-        public static T instance => getInstance();
+        public static T instance => GetInstance();
 
-        private static T getInstance()
+        private static T GetInstance()
         {
             if (_instance == null)
             {
                 lock (syslock)
                 {
-                    _instance = GameObject.FindObjectOfType(typeof(T)) as T;
+                    _instance = GameObject.FindFirstObjectByType<T>();
                     if (_instance == null)
                     {
                         GameObject go = new GameObject(typeof(T).Name);
