@@ -8,7 +8,7 @@ namespace Fox
     using Excel;
     using Data;
 
-    public class ExcelData : DataBase<ExcelData>, IExcelTableRegister
+    public partial class ExcelData : DataBase<ExcelData>, IExcelTableRegister
     {
         private Dictionary<string, ExcelTableBase> tables = new Dictionary<string, ExcelTableBase>();
 
